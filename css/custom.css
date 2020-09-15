@@ -1,0 +1,18 @@
+
+/** ADD YOUR AWESOME CODES HERE **/
+
+body {
+	min-width: 330px;
+}
+
+.progress {
+    text-align:center;
+}
+.progress-value {
+    position:absolute;
+    right:0;
+    left:0;
+    font-weight: bold;
+    font-size: 150%;
+    color: black;
+}
