@@ -16,3 +16,69 @@ body {
     font-size: 150%;
     color: black;
 }
+.submenu {
+	text-align: left;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    border-bottom: none;
+    color: #6f6f6f;
+    padding: 3px 12px !important;
+    border-bottom: none;
+    padding-top: 13px !important;
+    padding-bottom: 13px !important;
+}
+
+.products-box-main {
+	padding: 70px 0px;
+	padding-bottom: 20px;
+}
+
+.card-title {
+	font-weight: bold;
+	font-size: 150%;
+}
+
+.linea:before {
+	content: '';
+	transition-duration: 0.5s;
+
+	background: #1D2D44;
+	width: 2px;
+	height: 120px;
+
+	position: absolute;
+
+	left: 6px;
+	top: 100%;
+
+	opacity: 0;
+}
+
+.linea:hover:before {
+	top: 20%;
+
+	opacity: 1;
+}
+
+.lineaDer:before {
+	content: '';
+	transition-duration: 0.5s;
+
+	background: #1D2D44;
+	width: 2px;
+	height: 120px;
+
+	position: absolute;
+
+	right: 6px;
+	top: 100%;
+
+	opacity: 0;
+}
+
+.lineaDer:hover:before {
+	top: 20%;
+
+	opacity: 1;
+}
