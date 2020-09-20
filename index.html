@@ -95,8 +95,8 @@
                 <!-- Start Header Navigation -->
                 <div class="navbar-header">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
+                        <i class="fa fa-bars"></i>
+                    </button>
                     <a class="navbar-brand" href="index.html"><img src="images/logo_paso_prueba.png" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
@@ -107,8 +107,8 @@
                         <li class="nav-item active"><a class="nav-link" href="index.html">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">Nosotros</a></li>
                         <li class="dropdown megamenu-fw">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Productos</a>
-                            <ul class="dropdown-menu megamenu-content" role="menu">
+                            <a href="#" class="nav-link dropdown-toggle arrow" role="button" data-toggle="dropdown" data-target="#my-target">Productos</a>
+                            <ul id="my-target" class="dropdown-menu megamenu-content" role="menu" aria-haspopup="true" aria-expanded="false">
                                 <li>
                                     <div class="row">
                                         <div class="col-menu col-md-4">
@@ -654,7 +654,7 @@
     <!-- ALL JS FILES -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/jquery.superslides.min.js"></script>
     <script src="js/bootstrap-select.js"></script>
