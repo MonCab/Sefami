@@ -82,3 +82,8 @@ body {
 
 	opacity: 1;
 }
+
+h2.title-recientes {
+	font-size: x-large;
+	font-weight: bold;
+}
