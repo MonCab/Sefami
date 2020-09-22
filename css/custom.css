@@ -1,6 +1,7 @@
 
 /** ADD YOUR AWESOME CODES HERE **/
 
+/*Tamaño minimo de pantalla*/
 body {
 	min-width: 330px;
 }
@@ -39,6 +40,7 @@ body {
 	font-size: 150%;
 }
 
+/*Linea que se muestra en productos*/
 .linea:before {
 	content: '';
 	transition-duration: 0.5s;
@@ -83,7 +85,30 @@ body {
 	opacity: 1;
 }
 
+/*Cambio en h2 de recientes*/
 h2.title-recientes {
 	font-size: x-large;
 	font-weight: bold;
 }
+
+/*Configuraciones para el blog*/
+.blog-box-main {
+	padding: 70px 0px;
+	padding-bottom: 20px;
+}
+
+.social-list a {
+    width: 32px;
+    height: 32px;
+    padding-top: 3px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #63aaac
+}
+
+.social-list a:hover {
+    color: #AC3931;
+    background-color: rgba(172, 57, 49, 0.3)
+}
+
