@@ -104,12 +104,13 @@ h2.title-recientes {
     display: inline-block;
     text-align: center;
     border-radius: 50%;
-    background-color: #63aaac;
+    background-color: #101123;
+    color: #D5D5D5;
 }
 
 .social-list a:hover {
-    color: #AC3931;
-    background-color: rgba(172, 57, 49, 0.3)
+    color: #E53A33;
+    background-color: rgba(229, 58, 51, 0.3)
 }
 
 .topic-blog {
@@ -122,3 +123,8 @@ h2.title-recientes {
 	padding: 25px 0px;
 }
 
+/* Color azul */
+
+.azul {
+	background: #101123;
+}
