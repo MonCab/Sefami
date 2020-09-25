@@ -128,3 +128,19 @@ h2.title-recientes {
 .azul {
 	background: #101123;
 }
+
+.azul-texto {
+	color: #E53A33;
+	font-family: 'Work Sans', sans-serif;
+	padding: 0;
+	margin: 0;
+} 
+
+.subtitulo {
+	font-size: x-large;
+}
+
+.nombre {
+	font-size: 175%;
+	font-weight: bolder;
+}
