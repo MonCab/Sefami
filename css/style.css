@@ -544,7 +544,7 @@
     }
 }
  .arrow::before{
-     font-family: 'FontAwesome';
+     font-family: 'Font Awesome 5 Free';
      content: "\f0d7";
      margin-left: 5px;
      margin-top: 2px;
@@ -1252,12 +1252,13 @@
      -ms-transition: all .3s ease-in-out;
 }
  .footer-link ul li a::before {
-     font-family: FontAwesome;
+     font-family: 'Font Awesome 5 Free';
      content: "\f105";
      position: absolute;
-     left: 5px;
+     left: 0px;
      line-height: 30px;
-     font-size: 16px;
+     font-weight: 600;
+     font-size: 24px;
      transition: all .3s ease-in-out;
      -webkit-transition: all .3s ease-in-out;
      -moz-transition: all .3s ease-in-out;
@@ -1629,7 +1630,7 @@
      transition: top .2s,-webkit-transform .2s;
      transition: transform .2s,top .2s;
      transition: transform .2s,top .2s,-webkit-transform .2s;
-     font-family: FontAwesome;
+     font-family: 'Font Awesome 5 Free';
      content: "\f105";
 }
  .list-group-tree .list-group-collapse .list-group {
