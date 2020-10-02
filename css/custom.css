@@ -144,3 +144,39 @@ h2.title-recientes {
 	font-size: 175%;
 	font-weight: bolder;
 }
+
+/* Movimiento teatro por la dignidad */
+.movimiento-box-main {
+	padding: 70px 0px;
+	padding-bottom: 20px;
+
+	background-image: url(../images/mtd_baja.svg);
+  	background-color: #cccccc;
+  	height: 500px;
+ 	background-position: center;
+ 	background-repeat: no-repeat;
+ 	background-size: cover;
+  	position: relative;
+}
+
+.text-movimiento {
+	text-align: center;
+  	position: relative;
+  	top: 60%;
+  	color: white;
+}
+
+@media only screen and (max-width: 600px) {
+	.movimiento-box-main {
+		padding: 70px 0px;
+		padding-bottom: 20px;
+
+		background-image: url(../images/mtd_baja_small.svg);
+	  	background-color: #cccccc;
+	  	height: 350px;
+	 	background-position: center;
+	 	background-repeat: no-repeat;
+	 	background-size: cover;
+	  	position: relative;
+	}
+}
