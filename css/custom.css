@@ -4,6 +4,7 @@
 /*Tamaño minimo de pantalla*/
 body {
 	min-width: 330px;
+	background: #FFF;
 }
 
 .progress {
@@ -166,6 +167,14 @@ h2.title-recientes {
   	color: white;
 }
 
+.text-red {
+	color: #E53A33;
+}
+
+.red {
+	background: #E53A33;
+}
+
 @media only screen and (max-width: 600px) {
 	.movimiento-box-main {
 		padding: 70px 0px;
@@ -179,4 +188,44 @@ h2.title-recientes {
 	 	background-size: cover;
 	  	position: relative;
 	}
+}
+
+/* Read More */
+#summary {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#summary p.collapse:not(.show) {
+    height: 122px !important;
+    overflow: hidden;
+  
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;  
+}
+
+#summary p.collapsing {
+    min-height: 122px !important;
+}
+
+#summary a.collapsed:after  {
+	position: relative;
+	top: 15px;
+	left: 55px;
+    content: '+ Más información';
+    color: white;
+}
+
+#summary a:not(.collapsed):after {
+	position: relative;
+	top: 15px;
+	left: 55px;
+    content: '- Menos información';
+    color: white;
+}
+
+/* Información del libro*/
+.info {
+	font-size: small;
 }
