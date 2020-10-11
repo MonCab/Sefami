@@ -27,7 +27,14 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
+    <link
+        rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+        crossorigin="anonymous"
+        />
 
+    <link rel="stylesheet" href="css/shop.css" />
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -88,7 +95,7 @@
     <!-- End Main Top -->
 
     <!-- Start Main Top -->
-    <header class="main-header">
+    <header class="main-header my-2" >
         <!-- Start Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
             <div class="container">
@@ -97,7 +104,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index.html"><img src="images/logo_paso.png" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="index.html"><img src="images/logoSVG.svg" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -171,41 +178,18 @@
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                         <li class="side-menu"><a href="#">
-						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
+                    <div class="cart-btn">
+                    <span class="nav-icon">
+                        <i class="fas fa-cart-plus"></i>
+                    </span>
+                    <div class="cart-items">0</div>
+                </div>
 					</a></li>
                     </ul>
                 </div>
                 <!-- End Atribute Navigation -->
             </div>
-            <!-- Start Side Menu -->
-            <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-                <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-            <!-- End Side Menu -->
+
         </nav>
         <!-- End Navigation -->
     </header>
@@ -240,6 +224,101 @@
     <!-- End All Title Box -->
 
     <!-- Start Shop Page  -->
+    <!-- Start Confy -->
+        <!-- hero -->
+
+
+        <!-- products -->
+        <section class="products">
+            <div class="section-title">
+                <h2>Nuestros productos</h2>
+            </div>
+            <div class="products-center">
+                <!-- single product -->
+                <article class="product">
+                    <div class="img-container">
+                        <img
+                            src="./images/product-1.jpeg"
+                            alt="product"
+                            class="product-img"
+                        />
+                        <button class="bag-btn" data-id="1">
+                            <i class="fas fa-shopping-cart"></i>
+                            add to bag
+                        </button>
+                    </div>
+
+                    <h3>queen bed</h3>
+                    <h4>$16</h4>
+                </article>
+                <!-- end of single product -->
+            </div>
+        </section>
+        <!-- end of products -->
+        <!-- cart -->
+        <div class="cart-overlay">
+            <div class="cart">
+                <span class="close-cart"><i class="far fa-window-close"></i></span>
+                <h2>Tu carrito</h2>
+                <div class="cart-content">
+                    <!-- cart item -->
+                    <!-- Hardcoded item for testing -->
+                    
+                    <!-- <div class="cart-item">
+                        <img src="./images/product-1.jpeg" alt="product" />
+                        <div>
+                            <h4>queen bed</h4>
+                            <h5>$9.00</h5>
+                            <span class="remove-item">remove</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-chevron-up"></i>
+                            <p class="item-amount">
+                                1
+                            </p>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div> -->
+                    <!-- cart item -->
+                </div>
+                <div class="cart-footer">
+                    <h3>Total : $<span class="cart-total">0</span></h3>
+                    <button class="clear-cart banner-btn">Limpiar</button>
+                    <button class="clear-cart banner-btn">Pagar</button>
+                </div>
+            </div>
+        </div>
+        <!-- end of cart -->
+        <!-- contentful -->
+        <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+
+        <!-- End Confy -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="shop-box-inner">
         <div class="container">
             
@@ -413,6 +492,8 @@
     <script src="js/form-validator.min.js"></script>
     <script src="js/contact-form-script.js"></script>
     <script src="js/custom.js"></script>
+    <!--    javascript source -->
+    <script src="js/app.js"></script>
 </body>
 
 </html>

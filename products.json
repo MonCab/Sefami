@@ -1,0 +1,51 @@
+﻿{
+    "Sheet 1": [
+        {
+            "ID": "1",
+            "ISBN": "978-607-8092-00-0 ",
+            "Título": "Hacía una teoría dramática",
+            "Autor": "Maria Serguieievna Kurguinian",
+            "Editorial": "Paso De Gato",
+            "Año": "2010",
+            "Edición": "1",
+            "Precio": "13",
+            "Descripción": "Este estudio de Maria Serguieievna Kurguinian, escrito en 1964, es un extenso y cuidadoso examen del devenir del drama occidental y ruso a partir de una perspectiva histórica. El lector encontrará una interesante exploración de la estructura dramática de obras de autores como Esquilo, Sófocles, Aristófanes, Séneca, Shakespeare, Calderón de la Barca, Molière, Corneille, Voltaire, Lessing, Beaumarchais, Schiller, Goethe, Byron, Gógol, Pushkin, Ostro- vskii, Chéjov, Ibsen, Hauptmann, Gorki, Brecht, entre otros. ",
+            "Imagen": "/images/products/1.jpg",
+            "Cantidad": "10",
+            "Peso": "0.45",
+            "Cupon": "teoriapromo",
+            "Vendidos": "2"
+        },
+        {
+            "ID": "2",
+            "ISBN": "978-607-8092-14-7",
+            "Título": "Juegos de sueño y otros rodeos: alternativas a la fábula en la dramaturgia ",
+            "Autor": "Jean-Pierre Sarrazac ",
+            "Editorial": "Paso De Gato",
+            "Año": "2011",
+            "Edición": "2",
+            "Precio": "89",
+            "Descripción": "Jean-Pierre Sarrazac hace un profundo análisis de las alternativas que la escritura dra- mática moderna y contemporánea ha ofrecido para esquivar la crisis del drama. Asi- mismo, nos lleva a la construcción de la obra dramática por un camino diferente al de los procedimientos clásicos de la fábula. El autor somete la dramaturgia más relevante de los autores modernos a una vivisección para ver cómo construyen su escritura, y re- úne los procedimientos que ellos mismos han propuesto y experimentado. ",
+            "Imagen": "/images/products/2.jpg",
+            "Cantidad": "11",
+            "Peso": "0.9",
+            "Vendidos": "3"
+        },
+        {
+            "ID": "3",
+            "ISBN": "978-607-8092-27-7 ",
+            "Título": "Narraturgia: dramaturgia de textos narrativos",
+            "Autor": "José Sanchis Sinisterra",
+            "Editorial": "Paso de Gato",
+            "Año": "2012",
+            "Edición": "1",
+            "Precio": "33",
+            "Descripción": "Con especial interés en explorar la enorme riqueza formal de la novela, de la narrativa, para cuestionar y complejizar el ámbito de la dramaturgia, José Sanchis Sinisterra nos presenta Narraturgia, obra que ofrece al lector su propia experiencia, herramientas y sistematización del proceso para volcar al escenario textos surgidos de la narrativa. ",
+            "Imagen": "/images/products/3.jpg",
+            "Cantidad": "0",
+            "Peso": "0.56",
+            "Cupon": "teoriapromo",
+            "Vendidos": "12"
+        }
+    ]
+}
