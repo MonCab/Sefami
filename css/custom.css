@@ -130,6 +130,10 @@ h2.title-recientes {
 	background: #101123;
 }
 
+.blue {
+	color: #101123;
+}
+
 .azul-texto {
 	color: #E53A33;
 	font-family: 'Work Sans', sans-serif;
@@ -228,4 +232,14 @@ h2.title-recientes {
 /* Información del libro*/
 .info {
 	font-size: small;
+}
+
+/* Detalles del producto*/
+.img-detail {
+	box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+}
+
+ul.rating li {
+  display: inline;
+  padding-right: 0.5em;
 }
