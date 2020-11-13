@@ -63,6 +63,7 @@ class UI {
 	 <!-- single product -->
 				<article class="product">
 					<div class="img-container">
+						<a href = "/Sefami/shop-detail.html?productId=${product.id}">
 						<img
 							src=${product.image}
 							alt="product"
