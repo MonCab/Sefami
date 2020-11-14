@@ -7,6 +7,7 @@ const cartOverlay = document.querySelector(".cart-overlay");
 const cartItems = document.querySelector(".cart-items");
 const cartTotal = document.querySelector(".cart-total");
 const productsDOM = document.querySelector(".cart-articles");
+const totalDOM = document.querySelector(".order-box");
 const priceadjuster = new Intl.NumberFormat('es-MX',
 				{ style: 'currency', currency: 'MXN',
 				  minimumFractionDigits: 2 });
@@ -120,6 +121,7 @@ class UI {
                 addAmount.parentElement.nextElementSibling.innerText = priceadjuster.format(event.target.value *  tempItem.price);
                 //console.log(addAmount.parentElement.nextElementSibling.innerText)
 			} 
+			this.updateTotals(cart)
 		});
 	}
 
@@ -137,6 +139,60 @@ class UI {
 	getSingleButton(id) {
 		return buttonsDOM.find(button => button.dataset.id === id);
 	}
+
+	updateTotals(cart) {
+		let subTotal = 0;
+		let discount = "0"; //is there any discount option?
+		let discountCoupon = "0"; //same as above
+		let shippingCost = ""; //150 unless the total is >600
+		let grandTotal = 0;
+
+		cart.map(item => {
+			subTotal += item.price * item.amount;
+			//console.log(subTotal);
+		});
+		if (subTotal >= 600 || subTotal == 0)
+		{
+			shippingCost = "0" ;
+		}
+		else
+		{
+			shippingCost = "150";
+		}
+
+		grandTotal = subTotal + parseFloat(shippingCost) - parseFloat(discount) - parseFloat(discountCoupon);
+
+		let result = `<h3>Resumen del pedido</h3>
+		<div class="d-flex">
+			<h4>Subtotal</h4>
+			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(subTotal)} </div>
+		</div>
+		<div class="d-flex">
+			<h4>Discount</h4>
+			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(discount)} </div>
+		</div>
+		<hr class="my-1">
+		<div class="d-flex">
+			<h4>Coupon Discount</h4>
+			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(discountCoupon)} </div>
+		</div>
+
+		<div class="d-flex">
+			<h4>Shipping Cost</h4>
+			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(shippingCost)} </div>
+		</div>
+		<hr>
+		<div class="d-flex gr-total">
+			<h5>Grand Total</h5>
+			<div class="ml-auto h5"> ${priceadjuster.format(grandTotal)} </div>
+		</div>
+		<hr>
+		`;
+		totalDOM.innerHTML = result;
+	}
+
+
+
 }
 
 class Storage {
@@ -167,6 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		.getProducts(cart)
 		.then(products => {
 			ui.displayProducts(products);
+			ui.updateTotals(products)
 			//Storage.saveProducts(products);
 		})
 		.then(() => {
