@@ -168,22 +168,22 @@ class UI {
 			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(subTotal)} </div>
 		</div>
 		<div class="d-flex">
-			<h4>Discount</h4>
+			<h4>Descuento</h4>
 			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(discount)} </div>
 		</div>
 		<hr class="my-1">
 		<div class="d-flex">
-			<h4>Coupon Discount</h4>
+			<h4>Cupón</h4>
 			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(discountCoupon)} </div>
 		</div>
 
 		<div class="d-flex">
-			<h4>Shipping Cost</h4>
+			<h4>Envío</h4>
 			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(shippingCost)} </div>
 		</div>
 		<hr>
 		<div class="d-flex gr-total">
-			<h5>Grand Total</h5>
+			<h5>Total</h5>
 			<div class="ml-auto h5"> ${priceadjuster.format(grandTotal)} </div>
 		</div>
 		<hr>
