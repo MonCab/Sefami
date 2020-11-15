@@ -130,8 +130,8 @@ class UI {
 				}
 				
                 //console.log(addAmount.parentElement.nextElementSibling.innerText)
-			} 
-			this.updateTotals(cart)
+			}
+			this.updateTotals(cart);
 		});
 	}
 
@@ -140,11 +140,8 @@ class UI {
         cart = cart.filter(item => item.id !== id);
         console.log(cart)
         this.setCartValues(cart);
-        console.log("tessr")
 		Storage.saveCart(cart);
-		let button = this.getSingleButton(id);
-		button.disabled = false;
-		button.innerHTML = `<i class="fas fa-shopping-cart"></i>add to bag`;
+	
 	}
 	getSingleButton(id) {
 		return buttonsDOM.find(button => button.dataset.id === id);
