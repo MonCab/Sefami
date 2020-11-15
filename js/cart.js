@@ -114,11 +114,21 @@ class UI {
 				let addAmount = event.target;
                 let id = addAmount.dataset.id;
 				let tempItem = cart.find(item => item.id === id);
-				tempItem.amount = event.target.value;
-                Storage.saveCart(cart);
-                this.setCartValues(cart);
-                //console.log(cart);
-                addAmount.parentElement.nextElementSibling.innerText = priceadjuster.format(event.target.value *  tempItem.price);
+
+				if (event.target.value == 0)
+				{
+					productsDOM.removeChild(addAmount.parentElement.parentElement);
+					this.removeItem(id);
+				}
+				else
+				{
+					tempItem.amount = event.target.value;
+					Storage.saveCart(cart);
+					this.setCartValues(cart);
+					//console.log(cart);
+					addAmount.parentElement.nextElementSibling.innerText = priceadjuster.format(event.target.value *  tempItem.price);
+				}
+				
                 //console.log(addAmount.parentElement.nextElementSibling.innerText)
 			} 
 			this.updateTotals(cart)
