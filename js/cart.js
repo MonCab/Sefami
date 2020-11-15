@@ -8,12 +8,15 @@ const cartItems = document.querySelector(".cart-items");
 const cartTotal = document.querySelector(".cart-total");
 const productsDOM = document.querySelector(".cart-articles");
 const totalDOM = document.querySelector(".order-box");
+const couponDOM = document.querySelector(".coupon-box");
 const priceadjuster = new Intl.NumberFormat('es-MX',
 				{ style: 'currency', currency: 'MXN',
 				  minimumFractionDigits: 2 });
 
 let cart = [];
+let coupons = [];
 let buttonsDOM = [];
+let activeCoupon = [];
 //syntactical sugar of writing constructor function
 
 // products
@@ -39,7 +42,33 @@ class Products {
 			console.log(error);
 		}
 	}
+
+	async getCoupons() {
+
+		try {
+			let result = await fetch("coupons.json");
+			let data = await result.json();
+			/* let contentful = await client.getEntries({
+				content_type: "comfyHouseProducts"
+			}); */
+			//console.log(contentful.items);
+
+			let coupon = data.items;
+			coupon = coupon.map(item => {
+				const couponCode = item.couponCode;
+				const type = item.type;
+				const discount  = item.discount;
+				const idProducts = item.idProducts;
+				return { couponCode, type, discount, idProducts };
+			});
+			return coupon;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 }
+
 
 // ui
 class UI {
@@ -88,8 +117,10 @@ class UI {
             // cartItems.innerText = itemsTotal;
 	}
 
+	
+
 	setupAPP() {
-        cart = Storage.getCart();
+		cart = Storage.getCart();
 		//this.setCartValues(cart);
 		//this.populateCart(cart);
 		//cartBtn.addEventListener("click", this.showCart);
@@ -110,7 +141,7 @@ class UI {
 				// remove item
 				this.removeItem(id);
 			} else if (event.target.classList.contains("c-input-text")) {
-                console.log(event.target);
+                //console.log(event.target);
 				let addAmount = event.target;
                 let id = addAmount.dataset.id;
 				let tempItem = cart.find(item => item.id === id);
@@ -128,12 +159,37 @@ class UI {
 					//console.log(cart);
 					addAmount.parentElement.nextElementSibling.innerText = priceadjuster.format(event.target.value *  tempItem.price);
 				}
-				
                 //console.log(addAmount.parentElement.nextElementSibling.innerText)
-			}
+			} 
 			this.updateTotals(cart);
 		});
+
+		couponDOM.addEventListener("click", event => {
+
+			if (event.target.classList.contains("btn")) {
+                this.addCoupon(event.target.parentElement.previousElementSibling.value);
+			}
+			this.updateTotals(cart);
+			//console.log(event.target);
+		});
+		
+
 	}
+
+	addCoupon(id)
+	{
+		activeCoupon = coupons.filter(item => item.couponCode == id);
+		//in case you want to add some behavior like "invalid coupon" or something 
+		if (activeCoupon.length)
+		{
+			console.log("Found");
+		}
+		else{
+			console.log("NF");
+		}
+		
+	}
+
 
 	removeItem(id) {
         
@@ -150,15 +206,59 @@ class UI {
 	updateTotals(cart) {
 		let subTotal = 0;
 		let discount = "0"; //is there any discount option?
-		let discountCoupon = "0"; //same as above
+		let discountCoupon = 0.0; 
+		let discountType = "";
+		let discountArticles = [];
 		let shippingCost = ""; //150 unless the total is >600
+		let ogPrice = 0;
 		let grandTotal = 0;
+
+		let localCart = JSON.parse(JSON.stringify(cart));
+
+		activeCoupon.map(item => 
+			{
+				discountType = item.type;
+				discountCoupon = parseFloat(item.discount);
+				discountArticles = item.idProducts;
+			});
 
 		cart.map(item => {
 			subTotal += item.price * item.amount;
 			//console.log(subTotal);
 		});
-		if (subTotal >= 600 || subTotal == 0)
+		ogPrice = subTotal;
+
+		if (discountType == "product_percentage")
+		{
+			subTotal = 0;
+			localCart.map(item => {
+				if (discountArticles.includes(item.id))
+				{
+					item.price = item.price*(1-discountCoupon/100);
+				}
+				//console.log(subTotal);
+			});
+
+			localCart.map(item => {
+				subTotal += item.price * item.amount;
+			});
+		}
+		console.log(cart);
+		console.log(localCart);
+
+		let grandTotal_noship = subTotal - parseFloat(discount);
+
+		if (discountType == "total_percentage")
+		{
+			grandTotal_noship = grandTotal_noship*(1-discountCoupon/100);
+		}
+
+		if (discountType == "total_fix")
+		{
+			grandTotal_noship = grandTotal_noship-discountCoupon;
+		}
+
+		if (grandTotal_noship >= 600 || grandTotal_noship == 0 || discountType == "free_shipping")
 		{
 			shippingCost = "0" ;
 		}
@@ -167,12 +267,17 @@ class UI {
 			shippingCost = "150";
 		}
 
-		grandTotal = subTotal + parseFloat(shippingCost) - parseFloat(discount) - parseFloat(discountCoupon);
+		let discount_amount = ogPrice  - grandTotal_noship ;
+
+		grandTotal = grandTotal_noship + parseFloat(shippingCost) - parseFloat(discount);
+		
+		Storage.saveCheckout({ subTotal: ogPrice, discount: discount ,coupon: discount_amount, shipping: shippingCost, total: grandTotal });
+
 
 		let result = `<h3>Resumen del pedido</h3>
 		<div class="d-flex">
 			<h4>Subtotal</h4>
-			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(subTotal)} </div>
+			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(ogPrice)} </div>
 		</div>
 		<div class="d-flex">
 			<h4>Descuento</h4>
@@ -181,7 +286,7 @@ class UI {
 		<hr class="my-1">
 		<div class="d-flex">
 			<h4>Cupón</h4>
-			<div class="ml-auto font-weight-bold"> ${priceadjuster.format(discountCoupon)} </div>
+			<div class="ml-auto font-weight-bold"> - ${priceadjuster.format(discount_amount)} </div>
 		</div>
 
 		<div class="d-flex">
@@ -213,12 +318,42 @@ class Storage {
 	static saveCart(cart) {
 		localStorage.setItem("cart", JSON.stringify(cart));
 	}
+	static saveCheckout(cart) {
+		localStorage.setItem("checkout", JSON.stringify(cart));
+	}
 	static getCart() {
 		return localStorage.getItem("cart")
 			? JSON.parse(localStorage.getItem("cart"))
 			: [];
 	}
+
 }
+
+
+	// async function getCoupons() {
+
+	// 	try {
+	// 		let result = await fetch("coupons.json");
+	// 		let data = await result.json();
+	// 		/* let contentful = await client.getEntries({
+	// 			content_type: "comfyHouseProducts"
+	// 		}); */
+	// 		//console.log(contentful.items);
+
+	// 		let coupon = data.items;
+	// 		coupon = coupon.map(item => {
+	// 			const couponCode = item.couponCode;
+	// 			const type = item.type;
+	// 			const discount  = item.discount;
+	// 			const idProducts = item.idProducts;
+	// 			return { couponCode, type, discount, idProducts };
+	// 		});
+	// 		return coupon;
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// }
+
 
 document.addEventListener("DOMContentLoaded", () => {
 	const ui = new UI();
@@ -230,11 +365,21 @@ document.addEventListener("DOMContentLoaded", () => {
 		.getProducts(cart)
 		.then(products => {
 			ui.displayProducts(products);
-			ui.updateTotals(products)
+			ui.updateTotals(products);
+			//this.getCoupons();
 			//Storage.saveProducts(products);
 		})
 		.then(() => {
 			ui.cartLogic();
 		});
+
+	products
+		.getCoupons()
+		.then(coupos => {
+			coupons = coupos;
+			//console.log(coupons);
+		})
+	
+		//console.log(couponBox);
 });
 

@@ -1,0 +1,29 @@
+{
+    "items": [
+        {
+            "couponCode": "MENOS30%SELEC",
+            "type": "product_percentage",
+            "discount": "30",
+            "idProducts": [ "8", "9", "10" ]
+        },
+        {
+            "couponCode": "MENOS100TOTAL",
+            "type": "total_fix",
+            "discount": "100",
+            "idProducts": [""]
+        },
+        {
+            "couponCode": "MENOS50%",
+            "type": "total_percentage",
+            "discount": "50",
+            "idProducts": [""]
+        },
+        {
+            "couponCode": "ENVIOGRATIS",
+            "type": "free_shipping",
+            "discount": "0",
+            "idProducts": [""]
+        }
+
+    ]
+}
