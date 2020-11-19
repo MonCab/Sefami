@@ -202,13 +202,16 @@ body {
   letter-spacing: var(--mainSpacing);
 }
 .products-center {
-  width: 90vw;
+  width: 38vw;
   margin: 0 auto;
   max-width: 1170px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(auto-fill,minmax(147px, 1fr));
   grid-column-gap: 1.5rem;
   grid-row-gap: 2rem;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 .img-container {
   position: relative;
