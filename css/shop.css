@@ -264,3 +264,6 @@ body {
   text-align: center;
 }
 
+#side{
+  z-index: 0;
+}
