@@ -19,9 +19,12 @@ const productsDOM = document.querySelector(".products-center");
 const priceadjuster = new Intl.NumberFormat('es-MX',
 				{ style: 'currency', currency: 'MXN',
 				  minimumFractionDigits: 2 });
-
+var ui;
+var products;
 let cart = [];
 let buttonsDOM = [];
+let index = 0;
+let resultitem = "";
 //syntactical sugar of writing constructor function
 
 // products
@@ -57,30 +60,43 @@ class Products {
 // ui
 class UI {
 	displayProducts(products) {
-		let result = "";
-		products.forEach(product => {
-			result += `
-	 <!-- single product -->
-				<article class="product">
-					<div class="img-container">
-						<a href="/Sefami/shop-detail.html?productId=${product.id}">
-						<img		
-							src=${product.image}
-							alt="product"
-							class="product-img"
-						/></a>
-						<button class="bag-btn" data-id=${product.id}>
-							<i class="fas fa-shopping-cart"></i>
-							Agregar al carrito
-						</button>
-					</div>
-					<h3>${product.title}</h3>
-					<h4>${priceadjuster.format(product.price)}</h4>
-				</article>
-				<!-- end of single product -->
-	 `;
-		});
-		productsDOM.innerHTML = result;
+		console.log(index);
+		console.log(products.length);
+		if (index < products.length)
+		{
+		let i;
+		try{
+			for(i = index; i < index+20 ; i++) {
+				console.log(i);
+				resultitem += `
+		 <!-- single product -->
+					<article class="product">
+						<div class="img-container">
+							<a href="/Sefami/shop-detail.html?productId=${products[i].id}">
+							<img		
+								src=${products[i].image}
+								alt="product"
+								class="product-img"
+							/></a>
+							<button class="bag-btn" data-id=${products[i].id}>
+								<i class="fas fa-shopping-cart"></i>
+								Agregar al carrito
+							</button>
+						</div>
+						<h3>${products[i].title}</h3>
+						<h4>${priceadjuster.format(products[i].price)}</h4>
+					</article>
+					<!-- end of single product -->
+		 `;
+			};
+			index = i;
+		}catch{
+			index = i;
+		}
+		
+		}
+
+		productsDOM.innerHTML = resultitem;
 	}
 	getBagButtons() {
 		let buttons = [...document.querySelectorAll(".bag-btn")];
@@ -238,14 +254,15 @@ class Storage {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-	const ui = new UI();
-	const products = new Products();
+	ui = new UI();
+	products = new Products();
 	ui.setupAPP();
 
 	// get all products
 	products
 		.getProducts()
 		.then(products => {
+
 			ui.displayProducts(products);
 			Storage.saveProducts(products);
 		})
@@ -253,5 +270,17 @@ document.addEventListener("DOMContentLoaded", () => {
 			ui.getBagButtons();
 			ui.cartLogic();
 		});
+
+
 });
 
+window.onscroll = function(ev) {
+	var elementTarget = document.getElementById("elementsbox");
+    if ((window.innerHeight + window.pageYOffset) > (elementTarget.offsetTop + elementTarget.offsetHeight)) {
+		products
+		.getProducts()
+		.then(products => {
+			ui.displayProducts(products);
+		})
+    }
+};
