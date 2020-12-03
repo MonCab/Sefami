@@ -19,8 +19,11 @@ const productsDOM = document.querySelector(".products-center");
 const priceadjuster = new Intl.NumberFormat('es-MX',
 				{ style: 'currency', currency: 'MXN',
 				  minimumFractionDigits: 2 });
+const node = document.querySelector(".top-search");
+
 var ui;
-var products;
+var productArray;
+var originalProducts;
 let cart = [];
 let buttonsDOM = [];
 let index = 0;
@@ -47,7 +50,10 @@ class Products {
 				const price = item.price;
 				const id  = item.id;
 				const image = item.image;
-				return { title, price, id, image };
+				const desc = item.description;
+				const desc_short = item.description_short;
+				const cats = item.category;
+				return { title, price, id, image, desc, desc_short, cats };
 			});
 
 			return products;
@@ -60,14 +66,12 @@ class Products {
 // ui
 class UI {
 	displayProducts(products) {
-		console.log(index);
-		console.log(products.length);
 		if (index < products.length)
 		{
 		let i;
 		try{
 			for(i = index; i < index+20 ; i++) {
-				console.log(i);
+				//console.log(i);
 				resultitem += `
 		 <!-- single product -->
 					<article class="product">
@@ -91,13 +95,20 @@ class UI {
 			};
 			index = i;
 		}catch{
-			index = i;
+			index = i;			
 		}
 		
 		}
 
 		productsDOM.innerHTML = resultitem;
 	}
+
+	displayProductsClear(products) {
+		index = 0;
+		resultitem = ""
+		this.displayProducts(products);
+	}
+
 	getBagButtons() {
 		let buttons = [...document.querySelectorAll(".bag-btn")];
 		buttonsDOM = buttons;
@@ -254,16 +265,18 @@ class Storage {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+	window.scrollTo(0, 0);
 	ui = new UI();
-	products = new Products();
+	let products = new Products();
 	ui.setupAPP();
 
 	// get all products
 	products
 		.getProducts()
 		.then(products => {
-
-			ui.displayProducts(products);
+			productArray = JSON.parse(JSON.stringify(products));
+			originalProducts = JSON.parse(JSON.stringify(products));
+			ui.displayProducts(productArray);
 			Storage.saveProducts(products);
 		})
 		.then(() => {
@@ -271,16 +284,73 @@ document.addEventListener("DOMContentLoaded", () => {
 			ui.cartLogic();
 		});
 
-
 });
+
+/* function refreshProducts()
+{
+	console.log("refreshing products");
+	var products = new Products();
+	products
+		.getProducts()
+		.then(products => {
+			productArray = JSON.parse(JSON.stringify(products));
+		})
+} */
+
 
 window.onscroll = function(ev) {
 	var elementTarget = document.getElementById("elementsbox");
     if ((window.innerHeight + window.pageYOffset) > (elementTarget.offsetTop + elementTarget.offsetHeight)) {
-		products
-		.getProducts()
-		.then(products => {
-			ui.displayProducts(products);
-		})
+		ui.displayProducts(productArray);
     }
 };
+
+node.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+		productArray = JSON.parse(JSON.stringify(originalProducts));
+		event.preventDefault();
+		const reEscape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+		// needs to be done only once
+		const fillerWords = ["el","la","lo", "y", "e", "ni", "o", "u", "pero", "es", "luego", "ante", "con", "de", "en", "para", "por", "sin", "ademas", "asimismo", "del", "no", "tambien", "como", "porque", "que", "tal", "si", "a"];
+		let searchTerm = event.target.value;
+		searchTerm = searchTerm.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		searchTerm = searchTerm.replace(/[\u0021-\u002f]/g, "");
+		searchTerm = searchTerm.replace(/[\u003a-\u0040]/g, "");
+		searchTerm = searchTerm.replace(/[\u005b-\u0060]/g, "");
+		searchTerm = searchTerm.replace(/[\u007b-\u007e]/g, "");
+		fillerWords.forEach(element => {
+			searchTerm = searchTerm.replace(new RegExp("\\b" + element + "\\b", 'g'), "");
+		});
+		let tokens = searchTerm
+					.toLowerCase()
+					.split(' ')
+					.filter(function(token){
+					return token.trim() !== '';
+		});
+		if(tokens.length) {
+			//  Create a regular expression of all the search terms
+			let searchTermRegex = new RegExp(tokens.join('|'), 'gim');
+			let books = JSON.parse(JSON.stringify(productArray));
+			let filteredList = books.filter(function(book){
+			  // Create a string of all object values
+			  let bookString = '';
+			  
+			  for(let key in book) {
+				if(book.hasOwnProperty(key) && book[key] !== '' && key !== 'image') {
+				  bookString += book[key].toString().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim() + ' ';
+				}
+			  }
+			  // Return book objects where a match with the search regex if found
+			  return bookString.match(searchTermRegex);
+			});
+			productArray = filteredList;
+			window.scrollTo(0, 0);
+			// Render the search results
+			// console.log("inside search: ");
+			// console.log(productArray);
+			ui.displayProductsClear(productArray);
+
+		   }
+		
+    }
+});
